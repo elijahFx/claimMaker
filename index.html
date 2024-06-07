@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Конструктор Претензий</h1>
+    <h1>Конструктор Претензий (Некачественный товар)</h1>
     <form id="claim-form">
         <div class="form-group">
             <label for="name">Ваше ФИО:</label>
@@ -23,25 +23,38 @@
             <input type="tel" id="phone" placeholder="Напр. +375299999999" required>
         </div>
         <div class="form-group">
-            <label for="email">Ваш Email:</label>
-            <input type="email" id="email" placeholder="Напр. info@rozp.by" required>
-        </div>
-        <div class="form-group">
             <label for="name" >Наименование Вашего продавца, исполнителя:</label>
             <input type="text" id="liabelee" placeholder="Напр. ООО ИМВБРБ" required>
+        </div>
+        <div class="form-group">
+            <label for="unp" >УНП (Учетный номер плательщика):</label>
+            <input type="text" id="unp" placeholder="Напр. ООО ИМВБРБ" required>
         </div>
         <div class="form-group">
             <label for="name" >Юридический адрес Вашего продавца, исполнителя:</label>
             <input type="text" id="liabeleeAddress" placeholder="Напр. 220014, г. Минск, ул. Сурганова, д. 36, оф. 305" required>
         </div>
         <div class="form-group">
-            <label for="complaint">Текст Претензии:</label>
-            <textarea id="complaint" rows="10" required></textarea>
+            <label for="good">Наименование товара:</label>
+            <input id="good" placeholder="Напр. пылесос iPhone 11 (2021 г.)" rows="10" required >
         </div>
-        <button type="button" onclick="generateClaim()">Сделать Претензию</button>
+        <div class="form-group">
+            <label for="price">Цена товара:</label>
+            <input id="price" placeholder="Напр. 1396,00" rows="10" required >
+        </div>
+        <div class="form-group">
+            <label for="date">Дата покупки товара:</label>
+            <input id="date" placeholder="Напр. 01.12.2023," rows="10" required >
+        </div>
+        <div class="form-group">
+            <label for="complaint">Недостатки товара:</label>
+            <input id="complaint" placeholder="Напр. не работает интернет, камера не работает" required>
+        </div>
+        
+        <button type="button" onclick="generate()">Сделать Претензию</button>
     </form>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.20.4/docxtemplater.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" integrity="sha512-Qlv6VSKh1gDKGoJbnyA5RMXYcvnpIqhO++MhIM2fStMcGT9i2T//tSwYFlcyoRRDcDZ+TYHpH8azBBCyhpSeqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.47.4/docxtemplater.min.js" integrity="sha512-jEwiuF/zuz2ONTkeR8RdMT3qiXeu5bO5oXCujU1zXRaQj/8YSFxRQkX8uNoSoFnXOkBxtyXNYysswRhLK6DM0w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 </html>
