@@ -1,4 +1,92 @@
+let selectedOption = ""
+const { Document, Packer, Paragraph, TextRun, AlignmentType, Table, TableRow, TableCell, WidthType, BorderStyle } = docx;
+const INDENT = 4952
+
 document.addEventListener("DOMContentLoaded", function() {
+
+    let vozvr = true
+    let zamena = false
+    let sorazm = false
+    let vozmesh = false
+    let ustranen = false
+    let daysForOtvet = 7
+
+    const sorazmAmountDiv = document.querySelector("#sorazmDiv")
+    const vozmAmountDiv = document.querySelector("#vozmeshDiv")
+    const options = document.getElementById('options')
+
+
+    options.addEventListener('change', function() {
+        selectedOption = this.options[this.selectedIndex].text;
+        console.log("Selected option: " + selectedOption);
+
+        switch (selectedOption) {
+            case "Возврат денежных средств":
+                vozvr = true
+                zamena = false
+                sorazm = false
+                vozmesh = false
+                ustranen = false
+                vozmAmountDiv.style.display = `none`
+                sorazmAmountDiv.style.display = `none`
+                break;
+                case "Замена товара":
+                vozvr = false
+                zamena = true
+                sorazm = false
+                vozmesh = false
+                ustranen = false
+                vozmAmountDiv.style.display = `none`
+                sorazmAmountDiv.style.display = `none`
+                break;
+                case "Безвозмездное устранение недостатков товара":
+                vozvr = false
+                zamena = false
+                sorazm = false
+                vozmesh = false
+                ustranen = true
+                vozmAmountDiv.style.display = `none`
+                sorazmAmountDiv.style.display = `none`
+                break;
+                case "Соразмерное уменьшение стоимости товара":
+                    console.log("hello");
+                vozvr = false
+                zamena = false
+                sorazm = true
+                vozmesh = false
+                ustranen = false
+                vozmAmountDiv.style.display = `none`
+                sorazmAmountDiv.style.display = `block`
+                break;
+                case "Возмещение расходов на устранение недостатков товара третьими лицами":
+                vozvr = false
+                zamena = false
+                sorazm = false
+                vozmesh = true
+                ustranen = false
+                sorazmAmountDiv.style.display = `none`
+                vozmAmountDiv.style.display = `block`
+                break;
+            default:
+                break;
+        }
+
+
+
+        if(vozvr || sorazm || vozmesh) {
+            daysForOtvet = 7
+            console.log(daysForOtvet);
+        } else if (ustranen || zamena) {
+            daysForOtvet = 14
+            console.log(daysForOtvet);
+        }
+
+
+    });
+
+    
+
+
     document.querySelector("button").addEventListener("click", function() {
         const name = document.querySelector("#name").value;
         const address = document.querySelector("#address").value;
@@ -10,9 +98,204 @@ document.addEventListener("DOMContentLoaded", function() {
         const price = document.querySelector("#price").value;
         const good = document.querySelector("#good").value;
         const firstDate = document.querySelector("#date").value;
+        const sorazmAmount = document.querySelector("#sorazm").value
+        const vozmAmount = document.querySelector("#vozmesh").value
+        
         const abr = abbreviateName(name)
         const date = getCurrentDate()
 
+
+        let paragraphs = []
+        let paragraphs0 = []
+        let boldTreb = []
+
+
+        console.log(selectedOption);
+
+            if(selectedOption === "Возврат денежных средств" || selectedOption === "") {
+                paragraphs.push(new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+                    indent: { firstLine: 708 },
+                    children: [
+                        new TextRun({
+                            text: `1. Расторгнуть заключенный, между нами, договор;`,
+                            font: "Times New Roman",
+                            size: 28, // 14 pt = 28 half-points
+                        }),
+                    ],
+                }))
+                paragraphs.push(
+                new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+                    indent: { firstLine: 708 },
+                    children: [
+                        new TextRun({
+                            text: `2. Вернуть уплаченные мной денежные средства по договору в размере ${price} белорусских рублей.`,
+                            font: "Times New Roman",
+                            size: 28, // 14 pt = 28 half-points
+                        }),
+                    ],
+                    spacing: { after: 300 },
+                })
+            )
+            console.log(paragraphs);
+            
+            } else if(selectedOption === "Замена товара") {
+              
+                paragraphs.push(new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+                    indent: { firstLine: 708 },
+                    children: [
+                        new TextRun({
+                            text: `1. Осуществить замену товара ненадлежащего качества на товар надлежащего качества в срок не позднее 14 дней с момента получения настоящей претензии.`,
+                            font: "Times New Roman",
+                            size: 28, // 14 pt = 28 half-points
+                        }),
+                    ],
+                    spacing: { after: 300 }
+                })
+            )
+            boldTreb.push(new TextRun({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: { firstLine: 708 },
+                children: [
+                    new TextRun({
+                        text: `1.1. замены недоброкачественного товара товаром надлежащего качества;`,
+                        font: "Times New Roman",
+                        size: 28, // 14 pt = 28 half-points
+                        bold: true
+                    }),
+                ],
+            }))
+            } else if(selectedOption === "Безвозмездное устранение недостатков товара") {
+                
+                paragraphs.push(new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+                    indent: { firstLine: 708 },
+                    children: [
+                        new TextRun({
+                            text: `1. Безвозмездно устранить вышеизложенные недостатки товара не позднее 14 дней с момента получения настоящей претензии.`,
+                            font: "Times New Roman",
+                            size: 28, // 14 pt = 28 half-points
+                        }),
+                    ],
+                    spacing: { after: 300 }
+                })
+            )
+            boldTreb.push(new TextRun({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: { firstLine: 708 },
+                children: [
+                    new TextRun({
+                        text: `1.3. незамедлительного безвозмездного устранения недостатков товара;`,
+                        font: "Times New Roman",
+                        size: 28, // 14 pt = 28 half-points
+                        bold: true
+                    }),
+                ],
+            }))
+            } else if(selectedOption === "Соразмерное уменьшение стоимости товара") {
+               
+                paragraphs.push(new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+                    indent: { firstLine: 708 },
+                    children: [
+                        new TextRun({
+                            text: `1. Соразмерно уменьшить стоимость товара на ${sorazmAmount} белорусских рублей.`,
+                            font: "Times New Roman",
+                            size: 28, // 14 pt = 28 half-points
+                        }),
+                    ],
+                    spacing: { after: 300 }
+                })
+            )
+            paragraphs0.push(new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: { firstLine: 708 },
+                children: [
+                    new TextRun({
+                        text: `Поскольку мне был реализован некачественный товар, полагаю правомерным и необходимым соразмерно уменьшить его стоимость на ${sorazmAmount} белорусских рублей.`,
+                        font: "Times New Roman",
+                        size: 28, // 14 pt = 28 half-points
+                    }),
+                ],
+            }))
+
+
+            boldTreb.push(new TextRun({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: { firstLine: 708 },
+                children: [
+                    new TextRun({
+                        text: `1.2. соразмерного уменьшения покупной цены товара;`,
+                        font: "Times New Roman",
+                        size: 28, // 14 pt = 28 half-points
+                        bold: true
+                    }),
+                ],
+            }))
+
+
+            } else if(selectedOption === "Возмещение расходов на устранение недостатков товара третьими лицами") {
+            
+                paragraphs.push(new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+                    indent: { firstLine: 708 },
+                    children: [
+                        new TextRun({
+                            text: `1. Возместить расходы на устранение недостатка(-ов) товара общей стоимостью в ${vozmAmount} белорусских рублей.`,
+                            font: "Times New Roman",
+                            size: 28, // 14 pt = 28 half-points
+                        }),
+                    ],
+                    spacing: { after: 300 }
+                })
+            )
+            paragraphs0.push(new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: { firstLine: 708 },
+                children: [
+                    new TextRun({
+                        text: `В связи с наличием в товаре производственного(-ых) недостатка(-ов), мною были затрачены денежные средства в размере ${vozmAmount} белорусских рублей.`,
+                        font: "Times New Roman",
+                        size: 28, // 14 pt = 28 half-points
+                    }),
+                ],
+            }))
+
+
+            boldTreb.push(new TextRun({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: { firstLine: 708 },
+                children: [
+                    new TextRun({
+                        text: `1.4. возмещения расходов по устранению недостатков товара.`,
+                        font: "Times New Roman",
+                        size: 28, // 14 pt = 28 half-points
+                        bold: true
+                    }),
+                ],
+            }))
+
+
+            }
+
+        const consumer = {
+            type: selectedOption,
+            name,
+            address,
+            phone,
+            complaint,
+            date,
+            good,
+            price,
+            firstDate,
+            liabelee,
+        }
+
+/*
+
+НА БУДУЩЕЕ, ЕСЛИ ЕГР ВДРУГ ЗАХОЧЕТ РАБОТАТЬ
 
         if (unp) {
             fetch(`https://egr.gov.by/api/v2/egr/getBaseInfoByRegNum/${unp}`)
@@ -24,9 +307,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     console.error('Ошибка получения данных:', error);
                 });
         }
+*/
 
-        const { Document, Packer, Paragraph, TextRun, AlignmentType, Table, TableRow, TableCell, WidthType, BorderStyle } = docx;
-        const INDENT = 4952
 
         const doc = new Document({
             sections: [
@@ -127,7 +409,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             indent: { firstLine: 708 },
                             children: [
                                 new TextRun({
-                                    text: `Я, ${name}, ${firstDate} заключил(-а) с Вашей организацией договор купли-продажи ${good} (далее – товар).`,
+                                    text: `Я, ${name}, ${firstDate} заключил(-а) с Вашей организацией договор купли-продажи: ${good} (далее – товар).`,
                                     font: "Times New Roman",
                                     size: 28, // 14 pt = 28 half-points
                                 }),
@@ -166,6 +448,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                 }),
                             ],
                         }),
+                        ...paragraphs0,
                         new Paragraph({
                             alignment: AlignmentType.JUSTIFIED,
                             indent: { firstLine: 708 },
@@ -347,35 +630,13 @@ document.addEventListener("DOMContentLoaded", function() {
                             alignment: AlignmentType.JUSTIFIED,
                             children: [
                                 new TextRun({
-                                    text: `ПРОШУ`,
+                                    text: `ПРОШУ:`,
                                     font: "Times New Roman",
                                     size: 28, // 14 pt = 28 half-points
                                 }),
                             ],
                         }),
-                        new Paragraph({
-                            alignment: AlignmentType.JUSTIFIED,
-                            indent: { firstLine: 708 },
-                            children: [
-                                new TextRun({
-                                    text: `1.	Расторгнуть заключенный, между нами, договор;`,
-                                    font: "Times New Roman",
-                                    size: 28, // 14 pt = 28 half-points
-                                }),
-                            ],
-                        }),
-                        new Paragraph({
-                            alignment: AlignmentType.JUSTIFIED,
-                            indent: { firstLine: 708 },
-                            children: [
-                                new TextRun({
-                                    text: `2.	Вернуть уплаченные мной денежные средства по договору в размере ${price} белорусских рублей.`,
-                                    font: "Times New Roman",
-                                    size: 28, // 14 pt = 28 half-points
-                                }),
-                            ],
-                            spacing: { after: 300 }
-                        }),
+                        ...paragraphs,
                         new Paragraph({
                             alignment: AlignmentType.JUSTIFIED,
                             indent: { firstLine: 708 },
@@ -396,7 +657,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             indent: { firstLine: 708 },
                             children: [
                                 new TextRun({
-                                    text: `Срок предоставления ответа на претензию составляет 7 дней с момента ее получения. `,
+                                    text: `Срок предоставления ответа на претензию составляет ${daysForOtvet} дней с момента ее получения. `,
                                     font: "Times New Roman",
                                     size: 28, // 14 pt = 28 half-points
                                 }),
@@ -505,8 +766,12 @@ document.addEventListener("DOMContentLoaded", function() {
         Packer.toBlob(doc).then((blob) => {
             saveAs(blob, "Претензия.docx");
         });
+
+        
     });
 });
+
+
 
 function abbreviateName(fullName) {
     // Split the full name into parts
@@ -536,4 +801,19 @@ function getCurrentDate() {
     const year = date.getFullYear();
 
     return `${day}.${month}.${year}`;
+}
+
+function allClear() {
+    document.querySelector("#name").value = "";
+    document.querySelector("#address").value = "";
+    document.querySelector("#phone").value = "";
+    document.querySelector("#liabelee").value = "";
+    document.querySelector("#liabeleeAddress").value = "";
+    document.querySelector("#complaint").value = "";
+    document.querySelector("#unp").value = "";
+    document.querySelector("#price").value = "";
+    document.querySelector("#good").value = "";
+    document.querySelector("#date").value = "";
+    document.querySelector("#sorazm").value = "";
+    document.querySelector("#vozmesh").value = "";
 }

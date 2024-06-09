@@ -50,7 +50,24 @@
             <label for="complaint">Недостатки товара:</label>
             <input id="complaint" placeholder="Напр. не работает интернет, камера не работает" required>
         </div>
-        
+        <label for="options">Выберите опцию:</label>
+    <select id="options" name="options">
+        <option value="1">Возврат денежных средств</option>
+        <option value="2">Соразмерное уменьшение стоимости товара</option>
+        <option value="3">Возмещение расходов на устранение недостатков товара третьими лицами</option>
+        <option value="4">Безвозмездное устранение недостатков товара</option>
+        <option value="5">Замена товара</option>
+    </select>
+    <br>
+        <br>
+        <div id="vozmeshDiv" class="form-group" style="display: none;">
+            <label for="vozmesh">На какую сумму Вы бы хотели уменьшить стоимость товара?</label>
+            <input id="vozmesh" placeholder="Напр. 60,00" >
+        </div>
+        <div id="sorazmDiv" class="form-group" style="display: none;">
+            <label for="sorazm">Сколько денежных средств Вами было затрачено на устранение недостатка товара?</label>
+            <input id="sorazm" placeholder="Напр. 60,00" >
+        </div>
         <button type="button" onclick="generate()">Сделать Претензию</button>
     </form>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" integrity="sha512-Qlv6VSKh1gDKGoJbnyA5RMXYcvnpIqhO++MhIM2fStMcGT9i2T//tSwYFlcyoRRDcDZ+TYHpH8azBBCyhpSeqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
