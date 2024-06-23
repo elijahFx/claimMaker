@@ -8,65 +8,89 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Конструктор Претензий (Некачественный товар)</h1>
+    <label for="type">Выберите опцию:</label>
+    <select id="type" name="type">
+        <option value="1">Некачественный товар</option>
+        <option value="2">Некачественная услуга</option>
+        <option value="3">Нарушение сроков передачи оплаченного товара</option>
+        <option value="4">Нарушение сроков оказания услуг (выполнения работ)</option>
+        <option value="5">Односторонний отказ от договора оказания услуг (выполнения работ)</option>
+    </select>
+    <h1 id="mainTitle">Конструктор Претензий (Некачественный товар)</h1>
     <form id="claim-form">
         <div class="form-group">
             <label for="name">Ваше ФИО:</label>
-            <input type="text" id="name" placeholder="Напр. Иванов Иван Иванович" required>
+            <input type="text" id="name" placeholder="Иванов Иван Иванович" required>
         </div>
         <div class="form-group">
             <label for="address">Ваш Адрес:</label>
-            <input type="text" id="address" placeholder="Напр. 220014, г. Минск, ул. Сурганова, д. 36, кв. 503" required>
+            <input type="text" id="address" placeholder="220014, г. Минск, ул. Сурганова, д. 36, кв. 503" required>
         </div>
         <div class="form-group">
             <label for="phone">Ваш Телефон:</label>
-            <input type="tel" id="phone" placeholder="Напр. +375299999999" required>
+            <input type="tel" id="phone" placeholder="+375299999999" required>
         </div>
         <div class="form-group">
             <label for="name" >Наименование Вашего продавца, исполнителя:</label>
-            <input type="text" id="liabelee" placeholder="Напр. ООО ИМВБРБ" required>
+            <input type="text" id="liabelee" placeholder="ООО ИМВБРБ" required>
         </div>
         <div class="form-group">
-            <label for="unp" >УНП (Учетный номер плательщика):</label>
-            <input type="text" id="unp" placeholder="Напр. ООО ИМВБРБ" required>
+            <label for="unp">УНП (Учетный номер плательщика):</label>
+            <input type="text" id="unp" placeholder="123456789" pattern="\d{1,9}" maxlength="9" inputmode="numeric">
         </div>
         <div class="form-group">
             <label for="name" >Юридический адрес Вашего продавца, исполнителя:</label>
-            <input type="text" id="liabeleeAddress" placeholder="Напр. 220014, г. Минск, ул. Сурганова, д. 36, оф. 305" required>
+            <input type="text" id="liabeleeAddress" placeholder="220014, г. Минск, ул. Сурганова, д. 36, оф. 305" required>
         </div>
         <div class="form-group">
-            <label for="good">Наименование товара:</label>
-            <input id="good" placeholder="Напр. пылесос iPhone 11 (2021 г.)" rows="10" required >
+            <label for="good" id="goodLabel">Наименование товара:</label>
+            <input id="good" placeholder="Пылесос iPhone 11 (2021 г.)" rows="10" required >
         </div>
         <div class="form-group">
-            <label for="price">Цена товара:</label>
-            <input id="price" placeholder="Напр. 1396,00" rows="10" required >
+            <label for="price" id="priceLabel">Цена товара:</label>
+            <input id="price" placeholder="1396,00" rows="10" required >
         </div>
         <div class="form-group">
-            <label for="date">Дата покупки товара:</label>
-            <input id="date" placeholder="Напр. 01.12.2023," rows="10" required >
+            <label for="date" id="dateLabel">Дата покупки товара:</label>
+            <input id="date" placeholder="01.12.2023" rows="10" required >
         </div>
         <div class="form-group">
-            <label for="complaint">Недостатки товара:</label>
-            <input id="complaint" placeholder="Напр. не работает интернет, камера не работает" required>
+            <label for="complaint" id="complaintLabel">Недостатки товара:</label>
+            <input id="complaint" placeholder="Не работает интернет, камера не работает" required>
         </div>
-        <label for="options">Выберите опцию:</label>
+        <label for="options" id="optionsLabel">Выберите опцию:</label>
     <select id="options" name="options">
         <option value="1">Возврат денежных средств</option>
-        <option value="2">Соразмерное уменьшение стоимости товара</option>
-        <option value="3">Возмещение расходов на устранение недостатков товара третьими лицами</option>
-        <option value="4">Безвозмездное устранение недостатков товара</option>
+        <option value="2">Соразмерное уменьшение стоимости</option>
+        <option value="3">Возмещение расходов на устранение недостатков третьими лицами</option>
+        <option value="4">Безвозмездное устранение недостатков</option>
         <option value="5">Замена товара</option>
     </select>
+    <label class="container">Компенсация морального вреда:
+        <input type="checkbox" id="checkmark">
+        <span class="checkmark"></span>
+      </label>
+      <label class="container penaltyContainer" style="display: none;">Неустойка за несвоевременное исполнение обязательств по договору:
+        <input type="checkbox" id="penaltyCheckmark">
+        <span class="checkmark"></span>
+      </label>
     <br>
         <br>
         <div id="vozmeshDiv" class="form-group" style="display: none;">
             <label for="vozmesh">На какую сумму Вы бы хотели уменьшить стоимость товара?</label>
-            <input id="vozmesh" placeholder="Напр. 60,00" >
+            <input id="vozmesh" placeholder="60,00" >
         </div>
         <div id="sorazmDiv" class="form-group" style="display: none;">
             <label for="sorazm">Сколько денежных средств Вами было затрачено на устранение недостатка товара?</label>
-            <input id="sorazm" placeholder="Напр. 60,00" >
+            <input id="sorazm" placeholder="60,00" >
+        </div>
+        <div class="form-group moralDiv" style="display: none;">
+            <label for="moralAmount">Размер компенсации морального вреда:</label>
+            <input id="moralAmount" placeholder="100,00" rows="10" >
+        </div>
+        <div class="form-group penaltyDiv" style="display: none;">
+            <label for="penaltyDate">Крайний срок исполнения обязательств по договору:</label>
+            <input id="penaltyDate" placeholder="23.04.2024" rows="10" >
         </div>
         <button type="button" onclick="generate()">Сделать Претензию</button>
     </form>
