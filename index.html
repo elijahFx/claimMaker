@@ -1,101 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Конструктор Претензий</title>
-    <script src="app.js" defer></script>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <script src="claims_constructor.js" defer></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <label for="type">Выберите опцию:</label>
     <select id="type" name="type">
-        <option value="1">Некачественный товар</option>
-        <option value="2">Некачественная услуга</option>
-        <option value="3">Нарушение сроков передачи оплаченного товара</option>
-        <option value="4">Нарушение сроков оказания услуг (выполнения работ)</option>
-        <option value="5">Односторонний отказ от договора оказания услуг (выполнения работ)</option>
+      <option value="1">Некачественный товар</option>
+      <option value="2">Некачественная услуга</option>
+      <option value="3">Нарушение сроков передачи оплаченного товара</option>
+      <option value="4">
+        Нарушение сроков оказания услуг (выполнения работ)
+      </option>
+      <option value="5">
+        Односторонний отказ от договора оказания услуг (выполнения работ)
+      </option>
+      <option value="6">
+        Возврат качественного товара (в течение 14 календарных дней)
+      </option>
     </select>
     <h1 id="mainTitle">Конструктор Претензий (Некачественный товар)</h1>
     <form id="claim-form">
-        <div class="form-group">
-            <label for="name">Ваше ФИО:</label>
-            <input type="text" id="name" placeholder="Иванов Иван Иванович" required>
-        </div>
-        <div class="form-group">
-            <label for="address">Ваш Адрес:</label>
-            <input type="text" id="address" placeholder="220014, г. Минск, ул. Сурганова, д. 36, кв. 503" required>
-        </div>
-        <div class="form-group">
-            <label for="phone">Ваш Телефон:</label>
-            <input type="tel" id="phone" placeholder="+375299999999" required>
-        </div>
-        <div class="form-group">
-            <label for="name" >Наименование Вашего продавца, исполнителя:</label>
-            <input type="text" id="liabelee" placeholder="ООО ИМВБРБ" required>
-        </div>
-        <div class="form-group">
-            <label for="unp">УНП (Учетный номер плательщика):</label>
-            <input type="text" id="unp" placeholder="123456789" pattern="\d{1,9}" maxlength="9" inputmode="numeric">
-        </div>
-        <div class="form-group">
-            <label for="name" >Юридический адрес Вашего продавца, исполнителя:</label>
-            <input type="text" id="liabeleeAddress" placeholder="220014, г. Минск, ул. Сурганова, д. 36, оф. 305" required>
-        </div>
-        <div class="form-group">
-            <label for="good" id="goodLabel">Наименование товара:</label>
-            <input id="good" placeholder="Пылесос iPhone 11 (2021 г.)" rows="10" required >
-        </div>
-        <div class="form-group">
-            <label for="price" id="priceLabel">Цена товара:</label>
-            <input id="price" placeholder="1396,00" rows="10" required >
-        </div>
-        <div class="form-group">
-            <label for="date" id="dateLabel">Дата покупки товара:</label>
-            <input id="date" placeholder="01.12.2023" rows="10" required >
-        </div>
-        <div class="form-group">
-            <label for="complaint" id="complaintLabel">Недостатки товара:</label>
-            <input id="complaint" placeholder="Не работает интернет, камера не работает" required>
-        </div>
-        <label for="options" id="optionsLabel">Выберите опцию:</label>
-    <select id="options" name="options">
+      <div class="form-group">
+        <label for="name">Ваше ФИО:</label>
+        <input
+          type="text"
+          id="name"
+          placeholder="Иванов Иван Иванович"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="address">Ваш Адрес:</label>
+        <input
+          type="text"
+          id="address"
+          placeholder="220014, г. Минск, ул. Сурганова, д. 36, кв. 503"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="phone">Ваш Телефон:</label>
+        <input type="tel" id="phone" placeholder="+375299999999" required />
+      </div>
+      <div class="form-group">
+        <label for="liabelee">Наименование Вашего продавца, исполнителя:</label>
+        <input type="text" id="liabelee" placeholder="ООО ИМВБРБ" required />
+      </div>
+      <div class="form-group">
+        <label for="unp">УНП (Учетный номер плательщика):</label>
+        <input
+          type="text"
+          id="unp"
+          placeholder="123456789"
+          pattern="\d{1,9}"
+          maxlength="9"
+          inputmode="numeric"
+        />
+      </div>
+      <div class="form-group">
+        <label for="liabeleeAddress"
+          >Юридический адрес Вашего продавца, исполнителя:</label
+        >
+        <input
+          type="text"
+          id="liabeleeAddress"
+          placeholder="220014, г. Минск, ул. Сурганова, д. 36, оф. 305"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="good" id="goodLabel">Наименование товара:</label>
+        <input
+          id="good"
+          placeholder="Пылесос iPhone 11 (2021 г.)"
+          rows="10"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="price" id="priceLabel">Цена товара:</label>
+        <input id="price" placeholder="1396,00" rows="10" required />
+      </div>
+      <div class="form-group">
+        <label for="date" id="dateLabel">Дата покупки товара:</label>
+        <input id="date" placeholder="01.12.2023" rows="10" required />
+      </div>
+      <div class="form-group">
+        <label for="complaint" id="complaintLabel">Недостатки товара:</label>
+        <input
+          id="complaint"
+          placeholder="Не работает интернет, камера не работает"
+          required
+        />
+      </div>
+      <label for="options" id="optionsLabel">Выберите опцию:</label>
+      <select id="options" name="options">
         <option value="1">Возврат денежных средств</option>
         <option value="2">Соразмерное уменьшение стоимости</option>
-        <option value="3">Возмещение расходов на устранение недостатков третьими лицами</option>
+        <option value="3">
+          Возмещение расходов на устранение недостатков третьими лицами
+        </option>
         <option value="4">Безвозмездное устранение недостатков</option>
         <option value="5">Замена товара</option>
-    </select>
-    <label class="container">Компенсация морального вреда:
-        <input type="checkbox" id="checkmark">
+      </select>
+      <label class="container"
+        >Компенсация морального вреда:
+        <input type="checkbox" id="checkmark" />
         <span class="checkmark"></span>
       </label>
-      <label class="container penaltyContainer" style="display: none;">Неустойка за несвоевременное исполнение обязательств по договору:
-        <input type="checkbox" id="penaltyCheckmark">
+      <label class="container penaltyContainer" style="display: none"
+        >Неустойка за несвоевременное исполнение обязательств по договору:
+        <input type="checkbox" id="penaltyCheckmark" />
         <span class="checkmark"></span>
       </label>
-    <br>
-        <br>
-        <div id="vozmeshDiv" class="form-group" style="display: none;">
-            <label for="vozmesh">На какую сумму Вы бы хотели уменьшить стоимость товара?</label>
-            <input id="vozmesh" placeholder="60,00" >
-        </div>
-        <div id="sorazmDiv" class="form-group" style="display: none;">
-            <label for="sorazm">Сколько денежных средств Вами было затрачено на устранение недостатка товара?</label>
-            <input id="sorazm" placeholder="60,00" >
-        </div>
-        <div class="form-group moralDiv" style="display: none;">
-            <label for="moralAmount">Размер компенсации морального вреда:</label>
-            <input id="moralAmount" placeholder="100,00" rows="10" >
-        </div>
-        <div class="form-group penaltyDiv" style="display: none;">
-            <label for="penaltyDate">Крайний срок исполнения обязательств по договору:</label>
-            <input id="penaltyDate" placeholder="23.04.2024" rows="10" >
-        </div>
-        <button type="button" onclick="generate()">Сделать Претензию</button>
+      <button type="button" id="addSecondRequirement">
+        Заявить второе (последующее требование)
+      </button>
+
+      <!-- Элементы для второго требования (изначально скрыты) -->
+      <div id="secondRequirementContainer" style="display: none">
+        <label for="secondOptions" id="secondOptionsLabel"
+          >Выберите опцию для последующего требования:</label
+        >
+        <select id="secondOptions" name="secondOptions">
+          <option value="1">Возврат денежных средств</option>
+          <option value="2">Замена товара</option>
+        </select>
+      </div>
+      <br />
+      <br />
+      <div id="vozmeshDiv" class="form-group" style="display: none">
+        <label for="vozmesh"
+          >На какую сумму Вы бы хотели уменьшить стоимость товара?</label
+        >
+        <input id="vozmesh" placeholder="60,00" />
+      </div>
+      <div id="sorazmDiv" class="form-group" style="display: none">
+        <label for="sorazm"
+          >Сколько денежных средств Вами было затрачено на устранение недостатка
+          товара?</label
+        >
+        <input id="sorazm" placeholder="60,00" />
+      </div>
+      <div class="form-group moralDiv" style="display: none">
+        <label for="moralAmount">Размер компенсации морального вреда:</label>
+        <input id="moralAmount" placeholder="100,00" rows="10" />
+      </div>
+      <div class="form-group penaltyDiv" style="display: none">
+        <label for="penaltyDate"
+          >Крайний срок исполнения обязательств по договору:</label
+        >
+        <input id="penaltyDate" placeholder="23.04.2024" rows="10" />
+      </div>
+      <button id="finalBtn" type="button">Сделать Претензию</button>
     </form>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" integrity="sha512-Qlv6VSKh1gDKGoJbnyA5RMXYcvnpIqhO++MhIM2fStMcGT9i2T//tSwYFlcyoRRDcDZ+TYHpH8azBBCyhpSeqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.47.4/docxtemplater.min.js" integrity="sha512-jEwiuF/zuz2ONTkeR8RdMT3qiXeu5bO5oXCujU1zXRaQj/8YSFxRQkX8uNoSoFnXOkBxtyXNYysswRhLK6DM0w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-</body>
+    <script
+      src="./deps/FileSaver.min.js"
+      integrity="sha512-Qlv6VSKh1gDKGoJbnyA5RMXYcvnpIqhO++MhIM2fStMcGT9i2T//tSwYFlcyoRRDcDZ+TYHpH8azBBCyhpSeqw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="./deps/index.umd.min.js"></script>
+  </body>
 </html>
